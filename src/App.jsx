@@ -4,6 +4,7 @@ import MyColorPicker from "./components/MyColorPicker.jsx";
 import Badge from "./components/Badge.jsx";
 import ColorsProvider from "./hook/Colors.jsx";
 import InputsProvider from "./hook/Inputs.jsx";
+import LogoSelector from "./components/LogoSelector.jsx";
 
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
         <ColorsProvider>
           {/*<SvgProvider>*/}
           {/*  <SvgInput />*/}
-            <Result />
-            <MyColorPicker />
+          <Result />
+          <LogoSelector />
+          <MyColorPicker />
           {/*</SvgProvider>*/}
         </ColorsProvider>
       </InputsProvider>
