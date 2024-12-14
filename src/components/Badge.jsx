@@ -1,20 +1,27 @@
 import React, {useContext} from "react";
+import {ColorsContext} from "../hook/Colors.jsx";
+import {InputsContext} from "../hook/Inputs.jsx";
+import {LogoType} from "../entities/Badge.js";
 
-const Badge = ({
-  logo,
-  label,
-  labelColor,
-  style,
-  logoColor,
-               }) => {
+const Badge = () => {
+  const {labelBGColor, logoBGColor, logoFGColor} = useContext(ColorsContext);
+  const {style, logoType, b64Logo, classicLogo, labels} = useContext(InputsContext);
   const stylePart = "style=" + style;
-  const labelColorPart = "&labelColor=" + labelColor;
-  const logoColorPart = "&logoColor=" + logoColor;
+  const logoBGColorPart = "&labelColor=" + logoBGColor;
+  const logoColorPart = "&logoColor=" + logoFGColor;
   const b64Prefix = "data:image/svg%2bxml;base64,";
-  const logoPart = "&logo=" + b64Prefix + logo;
-  const url = `https://shields.io/badge/${label}-${labelColor}.svg?${stylePart}${logoColorPart}${logoPart}`
+  let logoPart = "&logo=";
+  logoPart += logoType === LogoType.normal ? classicLogo : b64Prefix + b64Logo ;
+  const url = `https://shields.io/badge/${labels.join('-')}-${labelBGColor}.svg?${stylePart}${logoBGColorPart}${logoColorPart}${logoPart}`
+  console.log("url", url);
   return ( <>
-    <img src={url} alt={label}/>
+    <img
+      src={url}
+      alt={labels.join(" ")}
+      style={{
+        width: "200px",
+      }}
+    />
   </> );
 }
 
